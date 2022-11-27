@@ -1,0 +1,26 @@
+version: "3.9"  
+services:
+  mongodb-service:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - volume_1:/mongodb 
+    container_name: mongodb-service   
+  backend:
+    build:
+      context: ./exam-backend
+      dockerfile: dockerfile
+    ports:
+      - "5000:5000"
+    container_name: backend 
+  frontend:
+    build:
+      context: ./exam-frontend
+      dockerfile: dockerfile
+    ports:
+      - "3000:80"
+    container_name: frontend 
+      
+volumes:
+  volume_1:
