@@ -10,14 +10,14 @@ services:
   backend:
     build:
       context: ./exam-backend
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     container_name: backend 
   frontend:
     build:
       context: ./exam-frontend
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "3000:80"
     container_name: frontend 
