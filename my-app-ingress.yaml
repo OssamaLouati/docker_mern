@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kuber-project-tls
+  namespace: exam  
+type: kubernetes.io/tls
+data:
+  tls.crt: YWNocmFm
+  tls.key: Q0Y3RkY4MUU3Rg==
+
+
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kuber-project
+  namespace: exam
+  labels:
+    app: Ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls: 
+  - hosts: 
+      - demo-kubernetes.com
+    secretName: kuber-project-tls
+  rules:
+  - host: demo-kubernetes.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
